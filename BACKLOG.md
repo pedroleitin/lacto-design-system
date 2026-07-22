@@ -67,8 +67,50 @@ forgotten.
 - [ ] **Breadcrumb / Pagination** — only for hierarchical navigation or long lists.
   Likely permanent YAGNI.
 
+## Responsiveness
+
+- [ ] **Mobile version** — nothing in the system was designed mobile-first. What exists
+  today is damage control: `Sidebar` becomes a full-width bottom strip below 640px,
+  `Tabs` scrolls horizontally instead of wrapping, and the docs grid collapses to one
+  column at 860px. Everything else assumes a pointer and a wide viewport. Needs a pass
+  over:
+  - **Touch targets** — `Switch` (17px tall track), `Kbd`, `Badge corner` and the
+    `Segmented` options are below the 44px comfortable minimum. The `outline` trick
+    already enlarges the hit area on `Switch` and `Segmented`; the others do not have it.
+  - **Hover-only affordances** — `Slider variant="bar"` only reveals its fill on hover,
+    `TextField action` only appears on hover, `Badge onHover` is invisible until hover,
+    and `Tooltip` has no touch equivalent. On a touch device these are all permanently
+    in their resting state. *Open: reveal them on `:active`/focus, or keep them
+    always-on below a breakpoint?*
+  - **Floating panels** — `Panel anchor` positions assume screen corners that a phone
+    does not really have. Likely a bottom sheet instead.
+  - **The docs site itself** — the nav is a 280px column; on a phone it should collapse
+    behind a button.
+  - *Open: is there a target device, or is this "usable on a tablet" rather than "built
+    for a phone"?*
+
 ## Documentation
 
+- [ ] **Box-model guides: more room and more detail** — the inspector works but is
+  cramped and only reports the basics.
+  - **Breathing room:** with guides on, the stage should loosen up — more padding, more
+    space between the demo elements — so the overlays of adjacent elements stop
+    touching. Today a dense row (the `Button` demo) turns into a wall of dashed
+    outlines.
+  - **More detail:** the chip shows tag, size, padding, margin and radius. Missing:
+    `gap` on the parent, `font-size`/`font-weight`, the resolved colors, and — most
+    useful — **the token name instead of the raw pixel value** (`--lc-space-7` rather
+    than `14`, `--lc-radius-lg` rather than `10px`), which is what actually teaches the
+    system. That means a reverse lookup from computed value to token in `tokens.json`.
+  - *Open: should the chip stay pinned to the hovered element, or move to a fixed panel
+    at the side of the stage so it never covers what you are inspecting?*
+- [ ] **Test the placement of the theme and language buttons** — right now the theme
+  toggle sits next to the wordmark and the `EN / PT` switch sits on its own row below
+  it, which eats vertical space at the top of the nav and reads as two unrelated
+  controls. Worth trying: both on the same row; both moved to the bottom of the nav
+  (they are set-once controls, not navigation); or a single settings popover. *Open:
+  does the language switch need to be visible at all times, or is it a preference you
+  set once?*
 - [ ] **Translate demo copy** — example labels ("Columns", "Draw", "Exported as SVG")
   are English-only; the `EN / PT` switch does not reach them. Doing it properly needs a
   string map per demo (23 files) for content that is illustrative, not normative.
