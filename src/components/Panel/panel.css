@@ -7,6 +7,9 @@
   border-radius: var(--lc-radius-4xl);
   box-shadow: var(--lc-shadow-panel);
   padding: var(--lc-space-8) var(--lc-space-9);
+  /* Publicados para os filhos com .lc-nested calcularem o raio concêntrico. */
+  --lc-r: var(--lc-radius-4xl);
+  --lc-p: var(--lc-space-8);
 }
 
 /* Enquanto algo anima atrás, o backdrop-filter recompõe a cena inteira a cada
@@ -28,10 +31,12 @@ body.lc-noblur .lc-toast {
   border: none;
   border-radius: var(--lc-radius-3xl);
   box-shadow: none;
+  --lc-r: var(--lc-radius-3xl);
 }
 
 .lc-panel--flush {
   padding: 0;
+  --lc-p: 0px;
 }
 
 .lc-panel__title {

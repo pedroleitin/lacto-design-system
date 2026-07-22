@@ -23,6 +23,21 @@ active. Just restoring the text contrast is enough to say "clickable".
 The track has no background of its own — it inherits the glass `Panel` it sits
 in. Outside a `Panel`, the row floats over the page with no box.
 
+### The shape you actually see
+
+The track is already `--lc-radius-full`, but almost every row lives inside a
+glass `Panel` — and it is the **panel's** 20px radius that shows on screen. When
+the panel holds nothing but the row, it follows the shape of its content:
+
+```css
+.lc-panel:has(> .lc-tabs:only-child) {
+  border-radius: var(--lc-radius-full);
+}
+```
+
+`:only-child` is the guard: a panel that also holds other content keeps its
+normal 20px, because there the rounded rectangle is correct.
+
 ## `role="tab"` vs `role="mode"`
 
 | | Semantics | When |

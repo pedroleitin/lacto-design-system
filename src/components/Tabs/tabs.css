@@ -54,6 +54,13 @@
   cursor: not-allowed;
 }
 
+/* O trilho já é uma pílula, mas quase sempre ele vive dentro de um Panel de
+   vidro — e é o raio de 20px DO PAINEL que aparece na tela. Quando o painel não
+   contém mais nada além da fileira, ele acompanha a forma do conteúdo. */
+.lc-panel:has(> .lc-tabs:only-child) {
+  border-radius: var(--lc-radius-full);
+}
+
 /* Em telas estreitas a fileira rola em vez de quebrar linha. */
 @media (max-width: 640px) {
   .lc-tabs {

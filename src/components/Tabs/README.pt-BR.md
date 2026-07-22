@@ -23,6 +23,21 @@ recuperar o contraste do texto já basta para dizer "clicável".
 O trilho não tem fundo próprio — ele herda o `Panel` de vidro em que está. Fora
 de um `Panel`, a fileira flutua sobre a página sem caixa.
 
+### A forma que você realmente vê
+
+O trilho já é `--lc-radius-full`, mas quase toda fileira vive dentro de um
+`Panel` de vidro — e é o raio de 20px **do painel** que aparece na tela. Quando o
+painel não contém nada além da fileira, ele acompanha a forma do conteúdo:
+
+```css
+.lc-panel:has(> .lc-tabs:only-child) {
+  border-radius: var(--lc-radius-full);
+}
+```
+
+O `:only-child` é a trava: um painel que também tenha outro conteúdo mantém os
+20px normais, porque ali o retângulo arredondado é o certo.
+
 ## `role="tab"` vs `role="mode"`
 
 | | Semântica | Quando |

@@ -21,6 +21,71 @@ needs the in-between values (6, 9, 14, 18).
 - `pill` 30px — outlined button
 - `full` — switch, slider, tab, badge
 
+## Nested radius
+
+A child seated inside the parent's padding needs a **smaller** radius, or the
+two curves run parallel instead of concentric and the gap between them fattens
+at the corners. The rule is arithmetic, not taste:
+
+```
+inner radius = outer radius − padding
+```
+
+<!-- widget:nested-radius -->
+
+Use the `.lc-nested` utility. The parent declares its own radius and padding
+once; custom properties inherit, so the child only needs the class:
+
+```css
+.dock {
+  --lc-r: var(--lc-radius-4xl);   /* 20px */
+  --lc-p: var(--lc-space-5);      /* 10px */
+  border-radius: var(--lc-r);
+  padding: var(--lc-p);
+}
+```
+
+```tsx
+<Panel className="dock">
+  <Button className="lc-nested">Undo</Button>
+</Panel>
+```
+
+`.lc-nested` computes `max(0px, calc(var(--lc-r) - var(--lc-p)))` — the `max`
+clamps to zero when the padding exceeds the radius. `Panel` already publishes
+`--lc-r` and `--lc-p`, so a nested child inside a default panel works with no
+setup.
+
+**When the padding differs per axis, use the smaller one** — that is the side
+where the curves come closest.
+
+### What already obeys it
+
+The rule was not invented here; it was already in the source projects,
+unwritten. Writing it down is what makes it reusable:
+
+| Container | Radius | Padding | Child | |
+|---|---|---|---|---|
+| `Segmented` track | 10px | 3px | option **7px** | ✓ |
+| `Select` menu | 14px | 6px | item **8px** | ✓ |
+| Dock (`Panel`) | 20px | 10px | button **10px** | ✓ |
+| `Tabs` track | full | 5px | tab **full** | ✓ |
+| `Sidebar` | 15px | 0 | full-bleed rows | ✓ |
+
+A full radius stays full: a pill inside a pill needs no correction, because the
+curve is already the tallest the box allows.
+
+> `Select`'s menu item used to be 9px. It is now 8px — the rule was almost
+> true, and making it true is cheaper than documenting an exception.
+
+### When it does not apply
+
+- The child does not touch the padding box (a floating badge, an absolutely
+  positioned overlay).
+- The child is full-bleed with no gap — then it inherits the parent's radius on
+  the corners it touches, as `Sidebar` rows do.
+- The parent has no radius. Zero minus anything is still zero.
+
 ## Margin and padding
 
 Lacto barely uses `margin`. Space between siblings comes from `gap` on the

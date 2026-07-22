@@ -14,6 +14,8 @@ import { Switch } from "../../components/Switch/Switch";
 import { Slider } from "../../components/Slider/Slider";
 import { Panel } from "../../components/Panel/Panel";
 import { useBoxGuides } from "../BoxGuides";
+import { useSound } from "../../sound/useSound";
+import { IconButton } from "../../components/IconButton/IconButton";
 import { type Lang, t } from "../i18n";
 
 type ColorToken = { light: string; dark: string; use: string; "use-pt-BR": string };
@@ -271,6 +273,123 @@ const IconSet = () => (
   </div>
 );
 
+/* ── Raio aninhado ──────────────────────────────────────────────────────── */
+function NestedRadius({ lang }: { lang: Lang }) {
+  const [outer, setOuter] = useState(20);
+  const [pad, setPad] = useState(10);
+  const inner = Math.max(0, outer - pad);
+
+  return (
+    <div style={{ marginBottom: 32 }}>
+      <div className="doc__stage lc-dots" style={{ display: "grid", gap: 20, justifyItems: "center" }}>
+        <div
+          style={{
+            background: "var(--lc-panel)",
+            borderRadius: outer,
+            padding: pad,
+            display: "flex",
+            gap: pad,
+          }}
+        >
+          {["Undo", "Redo"].map((l) => (
+            <span
+              key={l}
+              style={{
+                display: "grid",
+                placeItems: "center",
+                height: 36,
+                padding: "0 14px",
+                background: "var(--lc-surface)",
+                borderRadius: inner,
+                fontSize: 13,
+              }}
+            >
+              {l}
+            </span>
+          ))}
+        </div>
+
+        <span className="lc-mono lc-tnum" style={{ fontSize: 12, color: "var(--lc-muted)" }}>
+          {outer}px − {pad}px = {inner}px
+        </span>
+      </div>
+
+      <div style={{ display: "grid", gap: 9, maxWidth: 360, marginTop: 16 }}>
+        <Slider label={t(lang, "outerRadius")} min={0} max={40} suffix="px" value={outer} onChange={setOuter} />
+        <Slider label={t(lang, "padding")} min={0} max={40} suffix="px" value={pad} onChange={setPad} />
+      </div>
+    </div>
+  );
+}
+
+/* ── Som ────────────────────────────────────────────────────────────────── */
+function SoundPlayer({ lang }: { lang: Lang }) {
+  const snd = useSound();
+  const { muted, setMuted, note } = snd;
+  const [last, setLast] = useState("");
+
+  const fire = (label: string, run: () => void) => {
+    run();
+    setLast(label);
+  };
+
+  return (
+    <div className="doc__stage lc-dots" style={{ marginBottom: 32 }}>
+      <div style={{ display: "grid", gap: 16, justifyItems: "center" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <IconButton
+            round
+            icon={muted ? "volume_off" : "volume_up"}
+            label={muted ? t(lang, "soundOn") : t(lang, "soundOff")}
+            active={!muted}
+            onClick={() => {
+              setMuted(!muted);
+              // Nota de confirmação ao religar — sem ela, ligar o som é a
+              // única ação da página sem retorno nenhum.
+              if (muted) note(9);
+            }}
+          />
+          <span style={{ fontSize: 13, color: "var(--lc-muted)" }}>
+            {muted ? t(lang, "soundMuted") : t(lang, "soundPlaying")}
+          </span>
+        </div>
+
+        {/* note(index): cada tecla é um grau da escala */}
+        <div style={{ display: "flex", gap: 4, flexWrap: "wrap", justifyContent: "center" }}>
+          {Array.from({ length: 8 }, (_, i) => (
+            <Button key={i} size="sm" disabled={muted} onClick={() => fire(`note(${i})`, () => note(i))}>
+              {i}
+            </Button>
+          ))}
+        </div>
+
+        <div style={{ display: "flex", gap: 8, flexWrap: "wrap", justifyContent: "center", maxWidth: 520 }}>
+          {([
+            ["erase()", () => snd.erase()],
+            ["toggle(true)", () => snd.toggle(true)],
+            ["toggle(false)", () => snd.toggle(false)],
+            ["select()", () => snd.select()],
+            ["reveal(true)", () => snd.reveal(true)],
+            ["reveal(false)", () => snd.reveal(false)],
+            ["success()", () => snd.success()],
+            ["error()", () => snd.error()],
+            ["theme(true)", () => snd.theme(true)],
+            ["theme(false)", () => snd.theme(false)],
+          ] as const).map(([label, run]) => (
+            <Button key={label} size="sm" disabled={muted} onClick={() => fire(label, run)}>
+              {label}
+            </Button>
+          ))}
+        </div>
+
+        <span className="lc-mono" style={{ fontSize: 12, color: "var(--lc-muted)", minHeight: 16 }}>
+          {last}
+        </span>
+      </div>
+    </div>
+  );
+}
+
 /* ── Tokens ─────────────────────────────────────────────────────────────── */
 const TokensJson = () => (
   <pre className="doc__md" style={{ maxHeight: 520, overflow: "auto" }}>
@@ -294,5 +413,7 @@ export const WIDGETS: Record<string, (lang: Lang) => ReactNode> = {
   "icon-sizes": () => <IconSizes />,
   "icon-tones": () => <IconTones />,
   "icon-set": () => <IconSet />,
+  "nested-radius": (lang) => <NestedRadius lang={lang} />,
+  "sound-player": (lang) => <SoundPlayer lang={lang} />,
   "tokens-json": () => <TokensJson />,
 };

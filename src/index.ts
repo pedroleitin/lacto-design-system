@@ -66,5 +66,9 @@ export type { ToastTone, UseToastOptions } from "./components/Toast/Toast";
 export { Dropzone } from "./components/Dropzone/Dropzone";
 export type { DropzoneProps } from "./components/Dropzone/Dropzone";
 
+export { useSound } from "./sound/useSound";
+export type { UseSoundOptions } from "./sound/useSound";
+export { SoundEngine, SCALE_LENGTH } from "./sound/audio";
+
 export { Badge } from "./components/Badge/Badge";
 export type { BadgeProps, BadgeTone } from "./components/Badge/Badge";

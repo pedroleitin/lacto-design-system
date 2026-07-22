@@ -21,6 +21,71 @@ densa e precisa de valores intermediários (6, 9, 14, 18).
 - `pill` 30px — botão contornado
 - `full` — switch, slider, aba, badge
 
+## Raio aninhado
+
+Um filho encaixado no padding do pai precisa de um raio **menor**, ou as duas
+curvas ficam paralelas em vez de concêntricas e a folga entre elas engorda nos
+cantos. A regra é aritmética, não gosto:
+
+```
+raio interno = raio externo − padding
+```
+
+<!-- widget:nested-radius -->
+
+Use o utilitário `.lc-nested`. O pai declara o próprio raio e padding uma vez;
+custom properties herdam, então o filho só precisa da classe:
+
+```css
+.dock {
+  --lc-r: var(--lc-radius-4xl);   /* 20px */
+  --lc-p: var(--lc-space-5);      /* 10px */
+  border-radius: var(--lc-r);
+  padding: var(--lc-p);
+}
+```
+
+```tsx
+<Panel className="dock">
+  <Button className="lc-nested">Desfazer</Button>
+</Panel>
+```
+
+O `.lc-nested` calcula `max(0px, calc(var(--lc-r) - var(--lc-p)))` — o `max`
+trava em zero quando o padding passa do raio. O `Panel` já publica `--lc-r` e
+`--lc-p`, então um filho aninhado dentro de um painel padrão funciona sem
+nenhum ajuste.
+
+**Quando o padding é diferente em cada eixo, use o menor** — é o lado onde as
+curvas chegam mais perto.
+
+### O que já obedece
+
+A regra não foi inventada aqui; ela já estava nos projetos de origem, sem estar
+escrita. Escrevê-la é o que a torna reutilizável:
+
+| Contêiner | Raio | Padding | Filho | |
+|---|---|---|---|---|
+| Trilho do `Segmented` | 10px | 3px | opção **7px** | ✓ |
+| Menu do `Select` | 14px | 6px | item **8px** | ✓ |
+| Dock (`Panel`) | 20px | 10px | botão **10px** | ✓ |
+| Trilho do `Tabs` | total | 5px | aba **total** | ✓ |
+| `Sidebar` | 15px | 0 | linhas de borda a borda | ✓ |
+
+Raio total continua total: uma pílula dentro de outra não precisa de correção,
+porque a curva já é a maior que a caixa permite.
+
+> O item do menu do `Select` era 9px. Agora é 8px — a regra já era quase
+> verdadeira, e torná-la verdadeira sai mais barato que documentar a exceção.
+
+### Quando não vale
+
+- O filho não encosta na caixa de padding (um badge flutuante, uma sobreposição
+  posicionada em absoluto).
+- O filho é de borda a borda, sem folga — aí ele herda o raio do pai nos cantos
+  que toca, como fazem as linhas da `Sidebar`.
+- O pai não tem raio. Zero menos qualquer coisa continua zero.
+
 ## Margem e padding
 
 O Lacto quase não usa `margin`. O espaço entre irmãos vem de `gap` no contêiner;

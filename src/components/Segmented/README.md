@@ -33,6 +33,25 @@ is deliberate: it signals "this control is clickable" without promising which
 option would be chosen. In the dark theme the segments invert to stay readable
 on yellow.
 
+## Two options: click to toggle
+
+With **exactly two** options the control becomes a toggle: clicking the option
+that is already active switches to the other one. Clicking either half always
+changes the value.
+
+Without it, half the clicks on a binary control do nothing — and two boxes side
+by side read as a switch, so people click the one they can see rather than the
+one they want. It kicks in automatically; there is no prop.
+
+It does not apply with three or more options (there would be no single "other"
+to move to), and it skips a disabled sibling.
+
+> The control keeps `role="radiogroup"`, which describes the state correctly.
+> Re-clicking a checked native radio does nothing, so this is a deliberate
+> pointer affordance on top of the standard behaviour — not a replacement for
+> it. If the two options are opposites of one setting rather than two named
+> choices, use `Switch` instead.
+
 ## Icons
 
 `icon` takes a Material Symbols glyph, rendered at 16px. An icon-only option

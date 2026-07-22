@@ -83,6 +83,24 @@ input[type="search"] {
   background-color: var(--lc-line-strong);
 }
 
+/* Raio aninhado (concêntrico).
+ *
+ *  Um filho encaixado no padding do pai precisa de um raio MENOR, ou as duas
+ *  curvas ficam paralelas em vez de concêntricas e a folga entre elas engorda
+ *  nos cantos. A regra é aritmética, não gosto:
+ *
+ *      raio interno = raio externo − padding
+ *
+ *  O pai declara `--lc-r` (o próprio raio) e `--lc-p` (o próprio padding);
+ *  como custom properties herdam, o filho só precisa da classe. `max(0px, …)`
+ *  trava o resultado em zero quando o padding é maior que o raio.
+ *
+ *  Quando o padding é diferente em cada eixo, use o MENOR — é o lado onde as
+ *  curvas chegam mais perto. */
+.lc-nested {
+  border-radius: max(0px, calc(var(--lc-r, 0px) - var(--lc-p, 0px)));
+}
+
 /* Desabilitado: um controle sobreposto por outra configuração. */
 .lc-disabled,
 [data-lc-disabled="true"] {

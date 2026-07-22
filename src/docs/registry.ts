@@ -134,6 +134,8 @@ import motionEn from "./pages/foundations/motion.md?raw";
 import motionPt from "./pages/foundations/motion.pt-BR.md?raw";
 import iconsEn from "./pages/foundations/icons.md?raw";
 import iconsPt from "./pages/foundations/icons.pt-BR.md?raw";
+import soundEn from "./pages/foundations/sound.md?raw";
+import soundPt from "./pages/foundations/sound.pt-BR.md?raw";
 import tokensEn from "./pages/foundations/tokens.md?raw";
 import tokensPt from "./pages/foundations/tokens.pt-BR.md?raw";
 
@@ -150,6 +152,7 @@ export const FOUNDATIONS: Foundation[] = [
   { slug: "spacing", key: "spacing", md: both(spacingEn, spacingPt) },
   { slug: "motion", key: "motion", md: both(motionEn, motionPt) },
   { slug: "icons", key: "icons", md: both(iconsEn, iconsPt) },
+  { slug: "sound", key: "sound", md: both(soundEn, soundPt) },
   { slug: "tokens", key: "tokens", md: both(tokensEn, tokensPt) },
 ];
 

@@ -10,6 +10,7 @@ import {
 import { WIDGETS, GuideLegend } from "./pages/Foundations";
 import { useBoxGuides } from "./BoxGuides";
 import { LANGS, readLang, writeLang, t, type Lang } from "./i18n";
+import { useSound } from "../sound/useSound";
 
 import { Tooltip } from "../components/Tooltip/Tooltip";
 import { IconButton } from "../components/IconButton/IconButton";
@@ -133,6 +134,7 @@ export default function App() {
   const route = useHashRoute();
   const { theme, setTheme } = useTheme();
   const [lang, setLang] = useState<Lang>(readLang);
+  const { muted, setMuted, note, theme: themeChirp } = useSound();
 
   useEffect(() => writeLang(lang), [lang]);
 
@@ -162,14 +164,32 @@ export default function App() {
       <nav className="doc__nav lc-scroll">
         <div className="doc__brand">
           <a href="#/" className="doc__logo">Lacto</a>
-          <IconButton
-            round
-            size="sm"
-            iconSize="sm"
-            icon={theme === "dark" ? "light_mode" : "dark_mode"}
-            label={theme === "dark" ? t(lang, "lightTheme") : t(lang, "darkTheme")}
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          />
+          <span style={{ display: "flex", gap: 2 }}>
+            <IconButton
+              round
+              size="sm"
+              iconSize="sm"
+              icon={muted ? "volume_off" : "volume_up"}
+              label={muted ? t(lang, "soundOn") : t(lang, "soundOff")}
+              onClick={() => {
+                setMuted(!muted);
+                // Nota de confirmação ao religar — ver a página Som.
+                if (muted) note(9);
+              }}
+            />
+            <IconButton
+              round
+              size="sm"
+              iconSize="sm"
+              icon={theme === "dark" ? "light_mode" : "dark_mode"}
+              label={theme === "dark" ? t(lang, "lightTheme") : t(lang, "darkTheme")}
+              onClick={() => {
+                const next = theme === "dark" ? "light" : "dark";
+                setTheme(next);
+                themeChirp(next === "dark");
+              }}
+            />
+          </span>
         </div>
 
         <div className="doc__lang">

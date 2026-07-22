@@ -44,6 +44,18 @@ behind it.
 - **Light/dark theme** via `[data-theme]` on `<html>`, with no provider.
 - **Google Material Symbols Outlined** as an icon font (ligatures), with size, weight
   and tone tokens.
+- **Generative UI sound** (`useSound`) — pure Web Audio, no library and no audio files,
+  ported from SVG_DRAW's `features/audio.ts` and extended to eight sounds: `note`,
+  `erase`, `toggle`, `select`, `reveal`, `success`, `error`, `theme`. One grammar behind
+  them — **rising creates and confirms, falling removes and fails** — and volume encodes
+  frequency, so events that fire constantly are near-silent. Muted by default, preference
+  persisted like the theme. No component plays a sound on its own; the app decides what
+  deserves to be heard.
+- **Nested radius rule** (`.lc-nested`) — `inner radius = outer radius − padding`, so a
+  child seated in the parent's padding stays concentric instead of running parallel. The
+  parent publishes `--lc-r` and `--lc-p`; `Panel` already does. The rule was already
+  implicit in `Segmented`, `Tabs` and the dock; writing it down made `Select`'s menu item
+  8px instead of 9px, which is the one place it was off.
 
 ### Design decisions recorded
 

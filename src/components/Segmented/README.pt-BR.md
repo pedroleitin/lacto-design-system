@@ -34,6 +34,25 @@ O hover pinta o **trilho inteiro** de amarelo, não o segmento sob o cursor.
 seria escolhida. No tema escuro os segmentos invertem para continuar legíveis
 sobre o amarelo.
 
+## Duas opções: clicar alterna
+
+Com **exatamente duas** opções o controle vira um alternador: clicar na opção
+que já está ativa passa para a outra. Clicar em qualquer metade sempre muda o
+valor.
+
+Sem isso, metade dos cliques num controle binário não faz nada — e duas caixas
+lado a lado leem como um interruptor, então a pessoa clica na que está vendo, e
+não na que quer. Liga sozinho; não tem prop.
+
+Não vale com três ou mais opções (não haveria uma "outra" única para onde ir), e
+pula um irmão desabilitado.
+
+> O controle mantém `role="radiogroup"`, que descreve o estado corretamente.
+> Reclicar um radio nativo já marcado não faz nada, então isto é uma affordance
+> deliberada de ponteiro **em cima** do comportamento padrão, não uma
+> substituição. Se as duas opções forem os opostos de um mesmo ajuste, e não
+> duas escolhas nomeadas, use `Switch`.
+
 ## Ícones
 
 `icon` aceita um glifo Material Symbols, renderizado a 16px. Opção só de ícone

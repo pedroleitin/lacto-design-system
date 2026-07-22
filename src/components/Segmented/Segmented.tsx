@@ -38,6 +38,17 @@ export function Segmented<T extends string = string>({
   className = "",
   ...aria
 }: SegmentedProps<T>) {
+  /* Com exatamente duas opções o controle vira um alternador: clicar na opção
+     que já está ativa passa para a outra. Sem isso, metade dos cliques num
+     controle binário não faz nada — e a expectativa de quem vê duas caixas
+     lado a lado é a de um interruptor. */
+  const other = options.length === 2
+    ? options.find((o) => o.value !== value && !o.disabled)
+    : undefined;
+
+  const pick = (o: SegmentedOption<T>) =>
+    onChange(other && o.value === value ? other.value : o.value);
+
   const control = (
     <div
       role="radiogroup"
@@ -61,7 +72,7 @@ export function Segmented<T extends string = string>({
           aria-label={o.title ?? (typeof o.label === "string" ? o.label : undefined)}
           title={o.title}
           disabled={o.disabled}
-          onClick={() => onChange(o.value)}
+          onClick={() => pick(o)}
           className={`lc-seg__opt${value === o.value ? " is-active" : ""}`}
         >
           {o.icon ? <Icon name={o.icon} size="sm" /> : null}

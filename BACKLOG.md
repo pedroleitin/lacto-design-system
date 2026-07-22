@@ -19,6 +19,12 @@ Nothing here can be built until these are answered.
 - [ ] **RadioGroup — is `hint` enough?** Currently each option can carry a second line
   in `--lc-muted`. Do any cases need a thumbnail / visual preview instead?
 
+- [ ] **Should any component play a sound on its own?** The vocabulary is now eight
+  sounds, but the rule still stands: components are silent and the app decides. The
+  obvious candidate for breaking it is `useToast`, where `success`/`danger` already map
+  one-to-one onto `success()`/`error()`. *Open: opt-in prop on `useToast`, or keep every
+  call site explicit?*
+
 ## Next up (recommended order)
 
 - [ ] **Modal / Dialog** — the only gap that currently forces a hack (`window.confirm`)
