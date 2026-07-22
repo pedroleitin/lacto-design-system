@@ -1,0 +1,89 @@
+/* Faixa com dois polegares. Reaproveita o visual do Slider variant="track":
+   trilho de 16px, polegares de 16px, preenchimento só ENTRE eles. */
+.lc-range {
+  display: grid;
+  gap: var(--lc-space-4);
+}
+
+.lc-range__head {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--lc-text-14);
+}
+
+.lc-range__label {
+  color: var(--lc-text);
+}
+
+.lc-range__value {
+  color: var(--lc-text);
+  opacity: 0.5;
+  font-family: var(--lc-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.lc-range__rail {
+  position: relative;
+  height: 20px;
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
+  outline: none;
+}
+
+.lc-range__rail::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 16px;
+  transform: translateY(-50%);
+  background: var(--lc-line);
+  border-radius: var(--lc-radius-full);
+}
+
+.lc-range__fill {
+  position: absolute;
+  top: 50%;
+  height: 16px;
+  transform: translateY(-50%);
+  background: var(--lc-text);
+}
+
+/* Marcas de passo: pontinhos na cor do painel, sobre o trilho. */
+.lc-range__tick {
+  position: absolute;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  border-radius: var(--lc-radius-full);
+  background: var(--lc-panel);
+  transform: translate(-50%, -50%);
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.lc-range__thumb {
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--lc-radius-full);
+  background: var(--lc-text);
+  transform: translate(-50%, -50%);
+  transition: box-shadow var(--lc-motion-hover) var(--lc-motion-ease);
+}
+
+.lc-range__rail:hover .lc-range__thumb {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--lc-accent) 45%, transparent);
+}
+
+.lc-range__rail:focus-visible .lc-range__thumb--active {
+  box-shadow: var(--lc-focus-ring);
+}
+
+.lc-range[aria-disabled="true"] {
+  opacity: 0.4;
+  pointer-events: none;
+}

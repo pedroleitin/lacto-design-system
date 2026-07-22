@@ -1,0 +1,164 @@
+/* ── variant="bar" ─────────────────────────────────────────────────────
+   Pílula alta cujo preenchimento escuro mostra o valor, com rótulo (esq.) e
+   valor (dir.) DENTRO dela. O texto é pintado duas vezes — escuro sobre o
+   trilho claro e claro recortado pelo preenchimento — então sempre contrasta,
+   sem cálculo de luminância. */
+.lc-rng {
+  position: relative;
+  height: var(--lc-size-control);
+  border-radius: var(--lc-radius-full);
+  background: color-mix(in srgb, var(--lc-line) 20%, transparent);
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
+  outline: none;
+  transition: background var(--lc-motion-slider) ease;
+}
+
+/* Em repouso o slider é um fantasma: trilho a 20% e preenchimento a 5%. Só o
+   rótulo e o valor têm contraste. No hover/foco tudo ganha peso de uma vez —
+   trilho cheio, preenchimento sólido, texto claro aparecendo. */
+.lc-rng:hover,
+.lc-rng:focus-visible {
+  background: var(--lc-line);
+}
+
+.lc-rng:focus-visible {
+  box-shadow: var(--lc-focus-ring);
+}
+
+.lc-rng__content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  box-sizing: border-box;
+  font-size: var(--lc-text-13);
+  white-space: nowrap;
+  pointer-events: none;
+  color: var(--lc-text);
+}
+
+.lc-rng__val {
+  font-weight: var(--lc-weight-bold);
+  font-family: var(--lc-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.lc-rng__fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: color-mix(in srgb, var(--lc-text) 5%, transparent);
+  overflow: hidden;
+  transition: background var(--lc-motion-slider) ease;
+}
+
+.lc-rng:hover .lc-rng__fill,
+.lc-rng:focus-visible .lc-rng__fill {
+  background: var(--lc-text);
+}
+
+/* O texto claro só existe quando há preenchimento escuro atrás dele. */
+.lc-rng__content--light {
+  color: var(--lc-surface);
+  opacity: 0;
+  transition: opacity var(--lc-motion-slider) ease;
+}
+
+.lc-rng:hover .lc-rng__content--light,
+.lc-rng:focus-visible .lc-rng__content--light {
+  opacity: 1;
+}
+
+.lc-rng[aria-disabled="true"] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ── variant="track" ───────────────────────────────────────────────────
+   Rótulo e valor ACIMA, trilho fino de 16px com polegar redondo. Para painéis
+   estreitos onde o texto não caberia dentro da barra. */
+.lc-trk {
+  display: grid;
+  gap: var(--lc-space-4);
+}
+
+.lc-trk__head {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--lc-text-14);
+}
+
+.lc-trk__label {
+  color: var(--lc-text);
+  opacity: 0.5;
+}
+
+.lc-trk__value {
+  color: var(--lc-muted);
+  font-family: var(--lc-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.lc-trk__rail {
+  position: relative;
+  height: 20px;
+  cursor: pointer;
+  user-select: none;
+  touch-action: none;
+  outline: none;
+}
+
+.lc-trk__rail::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 16px;
+  transform: translateY(-50%);
+  background: var(--lc-line);
+  border-radius: var(--lc-radius-full);
+}
+
+.lc-trk__fill {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  height: 16px;
+  transform: translateY(-50%);
+  background: var(--lc-text);
+  border-radius: var(--lc-radius-full) 0 0 var(--lc-radius-full);
+}
+
+.lc-trk__thumb {
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: var(--lc-radius-full);
+  background: var(--lc-text);
+  transform: translate(-50%, -50%);
+  transition: box-shadow var(--lc-motion-hover) var(--lc-motion-ease);
+}
+
+.lc-trk__rail:hover .lc-trk__thumb {
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--lc-accent) 45%, transparent);
+}
+
+.lc-trk__rail:focus-visible .lc-trk__thumb {
+  box-shadow: var(--lc-focus-ring);
+}
+
+.lc-trk[aria-disabled="true"] {
+  opacity: 0.4;
+  pointer-events: none;
+}

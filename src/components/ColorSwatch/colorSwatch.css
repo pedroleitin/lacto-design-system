@@ -1,0 +1,108 @@
+/* O <input type="color"> nativo é feio mas insubstituível (abre o seletor do
+   SO). A solução: um invólucro estilizado com o input superdimensionado e
+   invisível por cima — a área de clique inteira abre o seletor nativo. */
+.lc-swatch {
+  position: relative;
+  display: inline-block;
+  width: var(--lc-size-swatch);
+  height: var(--lc-size-swatch);
+  padding: 0;
+  border: 1px solid var(--lc-line);
+  border-radius: var(--lc-radius-sm);
+  overflow: hidden;
+  cursor: pointer;
+  transition:
+    border-color var(--lc-motion-hover) var(--lc-motion-ease),
+    outline-color var(--lc-motion-hover) var(--lc-motion-ease),
+    transform var(--lc-motion-fast) var(--lc-motion-ease);
+}
+
+.lc-swatch:hover {
+  border-color: var(--lc-accent);
+}
+
+.lc-swatch:active {
+  transform: scale(var(--lc-press-scale-soft));
+}
+
+.lc-swatch:focus-within {
+  outline: 2px solid var(--lc-accent);
+  outline-offset: 1px;
+}
+
+/* Selecionado: contorno accent por FORA, para não comer a área de cor. */
+.lc-swatch.is-selected {
+  outline: 2px solid var(--lc-accent);
+  outline-offset: 1px;
+}
+
+.lc-swatch--round {
+  border-radius: var(--lc-radius-full);
+}
+
+.lc-swatch--lg {
+  width: var(--lc-size-swatch-lg);
+  height: var(--lc-size-swatch-lg);
+  border-width: 1.5px;
+}
+
+.lc-swatch--round:hover {
+  transform: scale(1.08);
+}
+
+/* Superdimensionado: os cantos arredondados do controle nativo ficam fora da
+   área visível, então o quadrado de cor preenche o invólucro inteiro. */
+.lc-swatch__input {
+  position: absolute;
+  top: -25%;
+  left: -25%;
+  width: 150%;
+  height: 150%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+/* Só leitura: sem input, a cor é pintada no próprio invólucro. */
+.lc-swatch--static {
+  cursor: default;
+}
+.lc-swatch--static:hover {
+  border-color: var(--lc-line);
+  transform: none;
+}
+
+/* Botão tracejado de adicionar cor. */
+.lc-swatch-add {
+  width: var(--lc-size-swatch);
+  height: var(--lc-size-swatch);
+  display: grid;
+  place-items: center;
+  border: 1px dashed var(--lc-line);
+  border-radius: var(--lc-radius-sm);
+  background: var(--lc-surface);
+  color: var(--lc-muted);
+  cursor: pointer;
+  transition:
+    border-color var(--lc-motion-hover) var(--lc-motion-ease),
+    color var(--lc-motion-hover) var(--lc-motion-ease);
+}
+
+.lc-swatch-add:hover {
+  border-color: var(--lc-accent);
+  color: var(--lc-accent);
+}
+
+.lc-swatch-add:focus-visible {
+  outline: none;
+  box-shadow: var(--lc-focus-ring);
+}
+
+.lc-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--lc-space-3);
+  align-items: center;
+}

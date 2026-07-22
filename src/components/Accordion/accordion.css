@@ -1,0 +1,102 @@
+.lc-acc {
+  display: flex;
+  flex-direction: column;
+}
+
+.lc-acc__item {
+  flex-shrink: 0;
+  transition: background-color var(--lc-motion-base) var(--lc-motion-ease);
+}
+
+/* O item INTEIRO acende no hover, não só o cabeçalho — o alvo é a linha toda. */
+.lc-acc__item:hover {
+  background: var(--lc-hover);
+}
+
+.lc-acc__header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lc-space-6);
+  padding: var(--lc-space-7) var(--lc-space-8);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--lc-font-sans);
+  text-align: left;
+}
+
+.lc-acc__header:focus-visible {
+  outline: none;
+  box-shadow: var(--lc-focus-ring);
+  border-radius: var(--lc-radius-md);
+}
+
+.lc-acc__title {
+  font-size: var(--lc-text-14);
+  font-weight: var(--lc-weight-medium);
+  color: var(--lc-text);
+  opacity: 0.6;
+  transition: opacity var(--lc-motion-base) var(--lc-motion-ease);
+}
+
+.lc-acc__item:hover .lc-acc__title {
+  opacity: 1;
+}
+
+/* A seta ganha um disco no hover — sinaliza que ela é o alvo, sem pintar nada
+   antes de o mouse chegar. */
+.lc-acc__chevron {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border-radius: var(--lc-radius-full);
+  opacity: 0.6;
+  flex-shrink: 0;
+  transition:
+    background-color var(--lc-motion-base) var(--lc-motion-ease),
+    opacity var(--lc-motion-base) var(--lc-motion-ease);
+}
+
+.lc-acc__item:hover .lc-acc__chevron {
+  opacity: 1;
+  background: rgba(127, 127, 127, 0.2);
+}
+
+.lc-acc__chevron .lc-icon {
+  transition: transform var(--lc-motion-slow) var(--lc-motion-ease);
+}
+
+.lc-acc__header[aria-expanded="true"] .lc-acc__chevron .lc-icon {
+  transform: rotate(180deg);
+}
+
+/* Abrir/fechar por grid-template-rows: anima até a altura real do conteúdo,
+   sem max-height chutado. */
+.lc-acc__region {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--lc-motion-slow) var(--lc-motion-ease);
+}
+
+.lc-acc__region--open {
+  grid-template-rows: 1fr;
+}
+
+.lc-acc__clip {
+  overflow: hidden;
+}
+
+.lc-acc__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lc-space-10);
+  padding: 0 var(--lc-space-8) var(--lc-space-12);
+}
+
+/* O último item não leva divisor. */
+.lc-acc__item:last-child > .lc-divider {
+  display: none;
+}

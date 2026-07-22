@@ -1,0 +1,100 @@
+/* Trilho baixo e largo com um polegar em forma de pílula que ocupa mais da
+   metade dele. Desligado o polegar é um contorno vazado; ligado ele é sólido.
+   O `outline` de 4px na mesma cor do trilho amplia a área de clique sem
+   engordar o desenho. */
+.lc-switch {
+  position: relative;
+  width: var(--lc-size-switch-w);
+  height: var(--lc-size-switch-h);
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  border-radius: var(--lc-radius-full);
+  background-color: color-mix(in srgb, var(--lc-line) 20%, transparent);
+  outline: 4px solid color-mix(in srgb, var(--lc-line) 20%, transparent);
+  cursor: pointer;
+  transition:
+    background-color var(--lc-motion-slow) var(--lc-motion-ease),
+    outline-color var(--lc-motion-slow) var(--lc-motion-ease);
+}
+
+.lc-switch:hover {
+  background-color: var(--lc-accent);
+  outline-color: var(--lc-accent);
+}
+
+.lc-switch:focus-visible {
+  outline: 4px solid var(--lc-accent);
+}
+
+.lc-switch:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.lc-switch:disabled:hover {
+  background-color: color-mix(in srgb, var(--lc-line) 20%, transparent);
+  outline-color: color-mix(in srgb, var(--lc-line) 20%, transparent);
+}
+
+.lc-switch__thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--lc-size-switch-thumb);
+  height: 100%;
+  border-radius: var(--lc-radius-full);
+  background: transparent;
+  border: 4px solid var(--lc-text);
+  box-sizing: border-box;
+  transition:
+    left var(--lc-motion-base) var(--lc-motion-ease),
+    background-color var(--lc-motion-slow) var(--lc-motion-ease),
+    border-color var(--lc-motion-slow) var(--lc-motion-ease);
+}
+
+.lc-switch[aria-checked="true"] .lc-switch__thumb {
+  left: calc(100% - var(--lc-size-switch-thumb));
+  background: var(--lc-text);
+  border-color: transparent;
+}
+
+/* No tema escuro o hover amarelo exige polegar claro para continuar legível. */
+[data-theme="dark"] .lc-switch:hover .lc-switch__thumb {
+  border-color: var(--lc-panel);
+}
+[data-theme="dark"] .lc-switch:hover[aria-checked="true"] .lc-switch__thumb {
+  background: var(--lc-panel);
+}
+
+/* ── Compacto: mesma lógica em 44×18, para barras densas. ─────────────── */
+.lc-switch--sm {
+  width: var(--lc-size-switch-compact-w);
+  height: var(--lc-size-switch-compact-h);
+}
+.lc-switch--sm .lc-switch__thumb {
+  width: 56%;
+  border-width: 3px;
+}
+.lc-switch--sm[aria-checked="true"] .lc-switch__thumb {
+  left: 44%;
+}
+
+/* ── Linha rotulada: rótulo à esquerda, controle empurrado à direita. ─── */
+.lc-switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lc-space-6);
+  width: 100%;
+  padding: var(--lc-space-6) var(--lc-space-10);
+}
+
+.lc-switch-row__label {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--lc-text-14);
+  color: var(--lc-text);
+  opacity: 0.5;
+  cursor: pointer;
+  user-select: none;
+}

@@ -1,0 +1,67 @@
+/* Contorno tracejado = "solte aqui". Sólido nunca é usado para área de drop —
+   o tracejado é o que distingue uma área receptiva de uma caixa comum. */
+.lc-dropzone {
+  position: relative;
+  display: grid;
+  place-items: center;
+  gap: var(--lc-space-2);
+  width: 100%;
+  padding: var(--lc-space-7);
+  border: 1.5px dashed var(--lc-line);
+  border-radius: var(--lc-radius-md);
+  background: transparent;
+  color: var(--lc-muted);
+  font-family: var(--lc-font-sans);
+  font-size: var(--lc-text-12);
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color var(--lc-motion-fast) var(--lc-motion-ease),
+    background-color var(--lc-motion-fast) var(--lc-motion-ease),
+    color var(--lc-motion-fast) var(--lc-motion-ease);
+}
+
+.lc-dropzone:hover {
+  border-color: var(--lc-muted);
+  color: var(--lc-text);
+}
+
+.lc-dropzone:focus-visible {
+  outline: none;
+  box-shadow: var(--lc-focus-ring);
+}
+
+/* Arquivo pairando: a borda vira SÓLIDA e amarela. A troca de estilo da borda
+   (e não só de cor) é o sinal mais legível de "pode soltar". */
+.lc-dropzone.is-over {
+  border-style: solid;
+  border-color: var(--lc-accent);
+  color: var(--lc-text);
+  background: color-mix(in srgb, var(--lc-accent) 10%, transparent);
+}
+
+.lc-dropzone__hint {
+  font-size: var(--lc-text-10);
+  opacity: 0.7;
+}
+
+/* Compacta: uma peça na fileira de miniaturas, com duas larguras de bloco. */
+.lc-dropzone--tile {
+  width: 98px;
+  height: var(--lc-size-tile);
+  padding: 0;
+  grid-auto-flow: column;
+  gap: 5px;
+  font-size: var(--lc-text-13);
+  white-space: nowrap;
+  border-width: 1px;
+}
+
+.lc-dropzone--disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.lc-dropzone__input {
+  display: none;
+}

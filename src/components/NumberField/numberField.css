@@ -1,0 +1,56 @@
+/* Pílula do mesmo tamanho do Button/Select, com o número em mono negrito.
+   Fica lado a lado com Select numa fileira sem desalinhar. */
+.lc-num {
+  display: flex;
+  align-items: center;
+  gap: var(--lc-space-3);
+  height: var(--lc-size-control-md);
+  min-width: 104px;
+  padding: 0 var(--lc-space-6);
+  background: var(--lc-surface);
+  border: none;
+  border-radius: var(--lc-radius-lg);
+  font-size: var(--lc-text-13);
+  transition:
+    background-color var(--lc-motion-hover) var(--lc-motion-ease),
+    box-shadow var(--lc-motion-hover) var(--lc-motion-ease);
+}
+
+.lc-num:focus-within {
+  box-shadow: var(--lc-focus-ring);
+}
+
+.lc-num__prefix,
+.lc-num__suffix {
+  color: var(--lc-muted);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.lc-num__input {
+  width: 100%;
+  min-width: 0;
+  border: none;
+  background: none;
+  outline: none;
+  color: var(--lc-text);
+  font-family: var(--lc-font-mono);
+  font-size: var(--lc-text-13);
+  font-weight: var(--lc-weight-bold);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/* As setinhas nativas quebram o alinhamento e são pequenas demais para mirar. */
+.lc-num__input::-webkit-outer-spin-button,
+.lc-num__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.lc-num--disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}

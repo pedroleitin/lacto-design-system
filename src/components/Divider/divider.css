@@ -1,0 +1,26 @@
+/* Horizontal: 90% da largura, centralizada. A folga nas pontas é o que faz a
+   sidebar respirar em vez de parecer uma tabela. */
+.lc-divider {
+  width: 90%;
+  height: 1px;
+  margin: 0 auto;
+  background: var(--lc-line);
+  border: none;
+  flex-shrink: 0;
+}
+
+.lc-divider--full {
+  width: 100%;
+}
+
+/* Vertical: separa grupos dentro de uma barra, esticando na altura do pai. */
+.lc-divider--vertical {
+  width: 1px;
+  height: auto;
+  align-self: stretch;
+  margin: 2px;
+}
+
+[data-theme="dark"] .lc-divider {
+  background: rgba(255, 255, 255, 0.08);
+}

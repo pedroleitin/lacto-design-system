@@ -1,0 +1,421 @@
+/* Chrome do site de documentação. Não faz parte do design system — usa os
+   mesmos tokens, mas nada aqui é exportado. */
+
+.doc {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  min-height: 100dvh;
+}
+
+/* Mesma regra da Sidebar do sistema: 10px de folga nos quatro lados e raio
+   de 15px — o painel se apoia sobre a página em vez de ser recortado dela. */
+.doc__nav {
+  position: sticky;
+  top: 10px;
+  align-self: start;
+  height: calc(100dvh - 20px);
+  margin: 10px;
+  overflow-y: auto;
+  padding: 20px 0 32px;
+  border-radius: var(--lc-radius-3xl);
+  background: var(--lc-panel);
+}
+
+.doc__brand {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 0 20px 18px;
+}
+
+.doc__logo {
+  color: inherit;
+  text-decoration: none;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.doc__group {
+  margin: 22px 20px 8px;
+}
+
+.doc__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 20px;
+  border: none;
+  background: none;
+  color: var(--lc-text);
+  font-family: var(--lc-font-sans);
+  font-size: 14px;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  opacity: 0.6;
+  transition:
+    background-color var(--lc-motion-base) var(--lc-motion-ease),
+    opacity var(--lc-motion-base) var(--lc-motion-ease);
+}
+
+.doc__link:hover {
+  background: var(--lc-hover);
+  opacity: 1;
+}
+
+.doc__link {
+  margin: 0 10px;
+  width: calc(100% - 20px);
+  border-radius: var(--lc-radius-md);
+}
+
+.doc__link.is-active {
+  opacity: 1;
+  font-weight: 600;
+  background: var(--lc-accent);
+  color: var(--lc-accent-ink);
+}
+
+.doc__link.is-active:hover {
+  background: var(--lc-accent);
+}
+
+.doc__main {
+  min-width: 0;
+  padding: 48px 56px 96px;
+  max-width: 940px;
+}
+
+.doc__title {
+  font-size: 40px;
+  font-weight: 600;
+  line-height: 1.05;
+  margin: 0 0 8px;
+  letter-spacing: -0.02em;
+}
+
+.doc__lede {
+  margin: 0 0 36px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--lc-muted);
+  max-width: 62ch;
+}
+
+/* Palco da demo: fundo pontilhado, para o componente ser julgado sobre o
+   mesmo fundo em que vai viver. */
+.doc__stage {
+  padding: 32px;
+  border: 1px solid var(--lc-line);
+  border-radius: 20px;
+  margin-bottom: 40px;
+  overflow-x: auto;
+}
+
+.doc__stage-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+/* ── Markdown renderizado ─────────────────────────────────────────────── */
+.doc__md {
+  max-width: 72ch;
+  line-height: 1.65;
+}
+
+.doc__md h1 {
+  display: none; /* o título já está no cabeçalho da página */
+}
+
+.doc__md h2 {
+  margin: 40px 0 12px;
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.doc__md h3 {
+  margin: 28px 0 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.doc__md p {
+  margin: 0 0 14px;
+}
+
+.doc__md ul,
+.doc__md ol {
+  margin: 0 0 14px;
+  padding-left: 22px;
+}
+
+.doc__md li {
+  margin-bottom: 6px;
+}
+
+.doc__md code {
+  font-family: var(--lc-font-mono);
+  font-size: 0.92em;
+  background: color-mix(in srgb, var(--lc-line) 45%, transparent);
+  padding: 1px 5px;
+  border-radius: 4px;
+}
+
+.doc__md pre,
+pre.doc__md {
+  background: var(--lc-panel);
+  border: 1px solid var(--lc-line);
+  border-radius: 12px;
+  padding: 14px 16px;
+  overflow-x: auto;
+  margin: 0 0 16px;
+}
+
+.doc__md pre code,
+pre.doc__md code {
+  background: none;
+  padding: 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.doc__md table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0 0 18px;
+  font-size: 14px;
+}
+
+.doc__md th,
+.doc__md td {
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--lc-line);
+  vertical-align: top;
+}
+
+.doc__md th {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--lc-muted);
+  font-weight: 600;
+}
+
+.doc__md blockquote,
+blockquote.doc__md {
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  border-left: 3px solid var(--lc-accent);
+  background: color-mix(in srgb, var(--lc-accent) 8%, transparent);
+  border-radius: 0 10px 10px 0;
+}
+
+.doc__md blockquote p:last-child,
+blockquote.doc__md p:last-child {
+  margin-bottom: 0;
+}
+
+.doc__md a {
+  color: var(--lc-text);
+  text-decoration-color: var(--lc-accent);
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+}
+
+.doc__md hr {
+  border: none;
+  border-top: 1px solid var(--lc-line);
+  margin: 32px 0;
+}
+
+/* ── Grades de fundamentos ────────────────────────────────────────────── */
+.doc__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.doc__chip {
+  border: 1px solid var(--lc-line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.doc__chip-swatch {
+  height: 64px;
+}
+
+.doc__chip-body {
+  padding: 10px 12px;
+  display: grid;
+  gap: 2px;
+}
+
+.doc__chip-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.doc__chip-val {
+  font-family: var(--lc-font-mono);
+  font-size: 11px;
+  color: var(--lc-muted);
+}
+
+.doc__chip-use {
+  font-size: 11px;
+  color: var(--lc-muted);
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.doc__row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--lc-line);
+}
+
+.doc__row-key {
+  width: 190px;
+  flex-shrink: 0;
+  font-family: var(--lc-font-mono);
+  font-size: 12px;
+  color: var(--lc-muted);
+}
+
+.doc__row-val {
+  width: 130px;
+  flex-shrink: 0;
+  font-family: var(--lc-font-mono);
+  font-size: 12px;
+}
+
+.doc__bar {
+  height: 16px;
+  background: var(--lc-accent);
+  border-radius: 4px;
+}
+
+/* ── Responsivo ───────────────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .doc {
+    grid-template-columns: 1fr;
+  }
+  .doc__nav {
+    position: static;
+    height: auto;
+    padding: 16px 0;
+    margin: 10px 10px 0;
+  }
+  .doc__main {
+    padding: 28px 20px 64px;
+  }
+  .doc__title {
+    font-size: 30px;
+  }
+  .doc__stage {
+    padding: 20px;
+  }
+}
+
+/* ── Inspetor de box model (só na documentação) ───────────────────────── */
+.doc__stage--guides *:not(.lc-guide *) {
+  outline: 1px dashed color-mix(in srgb, var(--lc-accent) 65%, transparent);
+  outline-offset: 0;
+}
+
+.lc-guide {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  pointer-events: none;
+}
+
+.lc-guide__margin,
+.lc-guide__border,
+.lc-guide__padding {
+  position: fixed;
+  pointer-events: none;
+}
+
+/* Margem: banda cheia por fora da borda. */
+.lc-guide__margin {
+  background: color-mix(in srgb, var(--lc-danger) 22%, transparent);
+}
+
+/* Borda: contorno sólido no accent, com o raio real do elemento. */
+.lc-guide__border {
+  outline: 1.5px solid var(--lc-accent);
+  outline-offset: -1px;
+}
+
+/* Padding: uma "borda" grossa desenhada com a espessura de cada lado — é o
+   único jeito de pintar só a faixa de padding sem cobrir o conteúdo. */
+.lc-guide__padding {
+  border-style: solid;
+  border-color: color-mix(in srgb, var(--lc-info) 30%, transparent);
+  box-sizing: border-box;
+}
+
+.lc-guide__chip {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 22px;
+  padding: 0 9px;
+  border-radius: 6px;
+  background: var(--lc-ink);
+  color: var(--lc-bg);
+  font-family: var(--lc-font-mono);
+  font-size: 11px;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: var(--lc-shadow-popover);
+}
+
+.lc-guide__chip b {
+  color: var(--lc-accent);
+  font-weight: 700;
+}
+
+/* Legenda das cores, ao lado do interruptor. */
+.doc__legend {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  font-size: 11px;
+  color: var(--lc-muted);
+}
+
+.doc__legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.doc__legend i {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+
+/* Seletor de idioma, logo abaixo da marca. */
+.doc__lang {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 20px 16px;
+}

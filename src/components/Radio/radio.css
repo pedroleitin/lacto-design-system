@@ -1,0 +1,103 @@
+/* NOVO no Lacto — o "radio" dos projetos de origem era, na verdade, um
+   Segmented de ícones. Este é o radio clássico, para escolhas empilhadas com
+   rótulos longos, onde um segmented não caberia. */
+.lc-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--lc-space-5);
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lc-radio-group--row {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--lc-space-7);
+}
+
+.lc-radio-group__legend {
+  padding: 0;
+  margin-bottom: var(--lc-space-5);
+}
+
+.lc-radio {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--lc-space-4);
+  font-size: var(--lc-text-14);
+  color: var(--lc-text);
+  cursor: pointer;
+  user-select: none;
+}
+
+.lc-radio--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.lc-radio__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.lc-radio__dot {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  flex-shrink: 0;
+  border: 2px solid var(--lc-line-strong);
+  border-radius: var(--lc-radius-full);
+  transition:
+    border-color var(--lc-motion-hover) var(--lc-motion-ease),
+    box-shadow var(--lc-motion-hover) var(--lc-motion-ease),
+    transform var(--lc-motion-fast) var(--lc-motion-ease);
+}
+
+.lc-radio__dot::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: var(--lc-radius-full);
+  background: var(--lc-text);
+  transform: scale(0);
+  transition: transform var(--lc-motion-base) var(--lc-motion-ease);
+}
+
+.lc-radio:hover .lc-radio__dot {
+  border-color: var(--lc-accent);
+}
+
+.lc-radio:active .lc-radio__dot {
+  transform: scale(var(--lc-press-scale-strong));
+}
+
+.lc-radio__input:checked + .lc-radio__dot {
+  border-color: var(--lc-text);
+}
+
+.lc-radio__input:checked + .lc-radio__dot::after {
+  transform: scale(1);
+}
+
+.lc-radio__input:focus-visible + .lc-radio__dot {
+  box-shadow: var(--lc-focus-ring);
+}
+
+.lc-radio__text {
+  display: grid;
+  gap: 2px;
+  line-height: 1.3;
+}
+
+.lc-radio__hint {
+  font-size: var(--lc-text-12);
+  color: var(--lc-muted);
+}

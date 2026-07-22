@@ -1,0 +1,139 @@
+/* Trilho rebaixado com um segmento selecionado sólido por cima. O `outline` de
+   3px na cor do trilho aumenta a área sem engordar a caixa — mesmo truque do
+   Switch, e é o que faz o hover amarelo envolver o controle inteiro. */
+.lc-seg {
+  display: inline-flex;
+  padding: 3px;
+  gap: 0;
+  background: color-mix(in srgb, var(--lc-line) 20%, transparent);
+  border-radius: var(--lc-radius-lg);
+  outline: 3px solid color-mix(in srgb, var(--lc-line) 20%, transparent);
+  transition:
+    background-color var(--lc-motion-slow) var(--lc-motion-ease),
+    outline-color var(--lc-motion-slow) var(--lc-motion-ease);
+}
+
+.lc-seg:hover {
+  background: var(--lc-accent);
+  outline-color: var(--lc-accent);
+}
+
+.lc-seg__opt {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 6px 12px;
+  border: none;
+  background: transparent;
+  color: var(--lc-text);
+  font-family: var(--lc-font-sans);
+  font-size: var(--lc-text-13);
+  font-weight: var(--lc-weight-medium);
+  line-height: 1.2;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 7px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lc-space-3);
+  transition:
+    background-color var(--lc-motion-base) var(--lc-motion-ease),
+    color var(--lc-motion-base) var(--lc-motion-ease),
+    opacity var(--lc-motion-base) var(--lc-motion-ease);
+}
+
+.lc-seg__opt:focus-visible {
+  outline: none;
+  box-shadow: var(--lc-focus-ring);
+}
+
+.lc-seg__opt.is-active {
+  background: var(--lc-text);
+  color: var(--lc-panel);
+}
+
+.lc-seg__opt:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* No escuro, o hover amarelo do trilho pede segmentos escuros para contrastar. */
+[data-theme="dark"] .lc-seg:hover .lc-seg__opt {
+  color: var(--lc-panel);
+}
+[data-theme="dark"] .lc-seg:hover .lc-seg__opt.is-active {
+  background: var(--lc-panel);
+  color: var(--lc-accent);
+}
+
+/* ── shape: pill ──────────────────────────────────────────────────────── */
+.lc-seg--pill {
+  border-radius: var(--lc-radius-full);
+  gap: 2px;
+}
+.lc-seg--pill .lc-seg__opt {
+  border-radius: var(--lc-radius-full);
+  min-width: 44px;
+  height: var(--lc-size-control-sm);
+  padding: 0 12px;
+  opacity: 0.45;
+}
+.lc-seg--pill .lc-seg__opt.is-active {
+  opacity: 1;
+}
+
+/* ── tone: accent — para a barra de ferramentas, onde a seleção é amarela
+   igual à dos botões. ─────────────────────────────────────────────────── */
+.lc-seg--accent {
+  background: var(--lc-surface);
+  outline: none;
+  padding: 0;
+  overflow: hidden;
+  border-radius: var(--lc-radius-xl);
+}
+.lc-seg--accent:hover {
+  background: var(--lc-surface);
+}
+.lc-seg--accent .lc-seg__opt {
+  border-radius: 0;
+  padding: 8px 18px;
+  opacity: 1;
+}
+.lc-seg--accent .lc-seg__opt + .lc-seg__opt {
+  border-left: 1px solid var(--lc-line);
+}
+.lc-seg--accent .lc-seg__opt:hover:not(.is-active):not(:disabled) {
+  background: var(--lc-hover);
+}
+.lc-seg--accent .lc-seg__opt.is-active {
+  background: var(--lc-accent);
+  color: var(--lc-accent-ink);
+  font-weight: var(--lc-weight-semibold);
+}
+[data-theme="dark"] .lc-seg--accent:hover .lc-seg__opt {
+  color: var(--lc-text);
+}
+[data-theme="dark"] .lc-seg--accent:hover .lc-seg__opt.is-active {
+  background: var(--lc-accent);
+  color: var(--lc-accent-ink);
+}
+
+/* ── Linha rotulada, igual à do Switch. ───────────────────────────────── */
+.lc-seg-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--lc-space-6);
+  width: 100%;
+  padding: var(--lc-space-6) var(--lc-space-10);
+}
+
+.lc-seg-row__label {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--lc-text-14);
+  color: var(--lc-text);
+  opacity: 0.5;
+  user-select: none;
+}

@@ -1,0 +1,80 @@
+.lc-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 5px;
+  border-radius: var(--lc-radius-full);
+  background: var(--lc-line);
+  color: var(--lc-text);
+  font-family: var(--lc-font-sans);
+  font-size: var(--lc-text-9);
+  font-weight: var(--lc-weight-bold);
+  line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.lc-badge--accent {
+  background: var(--lc-accent);
+  color: var(--lc-accent-ink);
+  border-radius: var(--lc-radius-xs);
+}
+
+.lc-badge--danger {
+  background: var(--lc-danger);
+  color: #fff;
+}
+
+.lc-badge--success {
+  background: var(--lc-success);
+  color: #fff;
+}
+
+/* Pílula de progresso/estado: maior, legível, com números tabulares. */
+.lc-badge--pill {
+  height: auto;
+  padding: 5px 11px;
+  font-size: var(--lc-text-12);
+  font-weight: var(--lc-weight-medium);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Sobreposto ao canto do elemento pai (que precisa ser position:relative). */
+.lc-badge--corner {
+  position: absolute;
+  top: 3px;
+  z-index: 2;
+  box-shadow: var(--lc-shadow-badge);
+}
+
+.lc-badge--corner-right { right: 3px; }
+.lc-badge--corner-left  { left: 3px; }
+
+/* Some até o hover do pai — usado no badge de excluir de miniaturas. */
+.lc-badge--on-hover {
+  opacity: 0;
+  transition: opacity var(--lc-motion-base) var(--lc-motion-ease);
+}
+
+.lc-badge-host:hover .lc-badge--on-hover,
+.lc-badge--on-hover:focus-visible {
+  opacity: 1;
+}
+
+button.lc-badge {
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--lc-motion-base) var(--lc-motion-ease);
+}
+
+button.lc-badge--danger:hover {
+  background: var(--lc-danger-strong);
+}
+
+/* Vazio não ocupa espaço (ex: pílula de progresso antes de começar). */
+.lc-badge:empty {
+  display: none;
+}

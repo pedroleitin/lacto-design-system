@@ -1,0 +1,107 @@
+/* Gatilho: uma pílula igual ao Button solid, com prefixo apagado + valor em
+   negrito + seta. O menu é portado para <body> (escapa do overflow do painel)
+   e usa o vidro do sistema. */
+.lc-select__btn {
+  justify-content: space-between;
+  gap: var(--lc-space-4);
+  min-width: 104px;
+}
+
+.lc-select__label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.lc-select__prefix {
+  color: var(--lc-muted);
+  flex-shrink: 0;
+}
+
+.lc-select__value {
+  color: inherit;
+  font-weight: var(--lc-weight-bold);
+  text-transform: capitalize;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.lc-select__caret {
+  color: var(--lc-muted);
+  font-size: var(--lc-icon-sm);
+  flex-shrink: 0;
+  transition: transform var(--lc-motion-base) var(--lc-motion-ease);
+}
+
+.lc-select__btn[aria-expanded="true"] .lc-select__caret {
+  transform: rotate(180deg);
+}
+
+.lc-select__btn.is-active .lc-select__prefix,
+.lc-select__btn.is-active .lc-select__caret {
+  color: inherit;
+}
+
+.lc-select--block,
+.lc-select--block .lc-select__btn {
+  width: 100%;
+}
+
+/* ── Menu ─────────────────────────────────────────────────────────────── */
+.lc-select__menu {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 6px;
+  background: var(--lc-glass);
+  -webkit-backdrop-filter: var(--lc-blur-glass);
+  backdrop-filter: var(--lc-blur-glass);
+  border: 1px solid var(--lc-glass-border);
+  border-radius: var(--lc-radius-2xl);
+  box-shadow: var(--lc-shadow-panel);
+  z-index: var(--lc-z-popover);
+  max-height: 50vh;
+  overflow-y: auto;
+  margin: 0;
+  list-style: none;
+}
+
+.lc-select__item {
+  background: none;
+  border: none;
+  color: var(--lc-text);
+  border-radius: 9px;
+  padding: 7px 16px;
+  font-family: var(--lc-font-sans);
+  font-size: var(--lc-text-13);
+  text-align: left;
+  white-space: nowrap;
+  text-transform: capitalize;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--lc-space-4);
+  transition: background-color var(--lc-motion-hover) var(--lc-motion-ease);
+}
+
+.lc-select__item:hover,
+.lc-select__item.is-highlighted {
+  background: var(--lc-hover);
+}
+
+.lc-select__item.is-selected {
+  background: var(--lc-accent);
+  color: var(--lc-accent-ink);
+  font-weight: var(--lc-weight-bold);
+}
+
+/* Rótulos com dígitos entram em mono — é a regra de números do sistema. */
+.lc-select__item.is-numeric,
+.lc-select__value.is-numeric {
+  font-family: var(--lc-font-mono);
+}

@@ -1,0 +1,29 @@
+/* Badge de atalho: letra maiúscula num quadradinho arredondado do tamanho da
+   fonte ao redor (1.35em) — acompanha o texto sem desalinhar a linha. */
+.lc-kbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.35em;
+  height: 1.35em;
+  padding: 0 0.3em;
+  margin-left: var(--lc-space-3);
+  font-family: var(--lc-font-mono);
+  font-size: 0.82em;
+  font-weight: var(--lc-weight-semibold);
+  line-height: 1;
+  color: var(--lc-text);
+  border: none;
+  border-radius: var(--lc-radius-xs);
+  background: color-mix(in srgb, var(--lc-line) 45%, transparent);
+  opacity: 0.75;
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+/* Dentro de um controle ativo (fundo accent) o badge escurece para contrastar. */
+.lc-btn.is-active .lc-kbd,
+.lc-btn:hover .lc-kbd {
+  color: inherit;
+  background: color-mix(in srgb, currentColor 18%, transparent);
+}

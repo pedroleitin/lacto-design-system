@@ -1,0 +1,71 @@
+/* ── glass: caixa flutuante sobre a tela/canvas ───────────────────────── */
+.lc-panel {
+  background: var(--lc-glass);
+  -webkit-backdrop-filter: var(--lc-blur-glass);
+  backdrop-filter: var(--lc-blur-glass);
+  border: 1px solid var(--lc-glass-border);
+  border-radius: var(--lc-radius-4xl);
+  box-shadow: var(--lc-shadow-panel);
+  padding: var(--lc-space-8) var(--lc-space-9);
+}
+
+/* Enquanto algo anima atrás, o backdrop-filter recompõe a cena inteira a cada
+   quadro. Ligue `body.lc-noblur` durante a animação: o vidro vira opaco e o
+   custo some, sem mudar o layout. */
+body.lc-noblur .lc-panel--glass,
+body.lc-noblur .lc-select__menu,
+body.lc-noblur .lc-toast {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  background: var(--lc-glass-solid);
+}
+
+/* ── solid: painel opaco (sidebar, dock, cartão) ──────────────────────── */
+.lc-panel--solid {
+  background: var(--lc-panel);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border: none;
+  border-radius: var(--lc-radius-3xl);
+  box-shadow: none;
+}
+
+.lc-panel--flush {
+  padding: 0;
+}
+
+.lc-panel__title {
+  margin: 0 0 var(--lc-space-5);
+}
+
+/* ── Ancoragem sobre a tela cheia ─────────────────────────────────────── */
+.lc-panel--float {
+  position: absolute;
+  z-index: var(--lc-z-float);
+}
+
+.lc-panel--top-left     { top: 14px;    left: 14px; }
+.lc-panel--top-right    { top: 14px;    right: 14px; }
+.lc-panel--top-center   { top: 14px;    left: 50%; transform: translateX(-50%); }
+.lc-panel--bottom-left  { bottom: 16px; left: 14px; }
+.lc-panel--bottom-right { bottom: 16px; right: 14px; }
+.lc-panel--bottom-center{ bottom: 16px; left: 50%; transform: translateX(-50%); }
+
+/* ── Morph: troca de conteúdo com a caixa mudando de tamanho ───────────
+   Sequência: some o conteúdo (0.11s) → anima largura/altura (0.21s) → aparece
+   o novo. Sem isso, trocar de painel dá um salto de layout. */
+.lc-panel--morph > * {
+  transition: opacity var(--lc-motion-instant) var(--lc-motion-ease);
+}
+
+.lc-panel--morph.is-fading > * {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lc-panel--morph.is-sizing {
+  overflow: hidden;
+  transition:
+    width 0.21s var(--lc-motion-ease),
+    height 0.21s var(--lc-motion-ease);
+}

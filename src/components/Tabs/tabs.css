@@ -1,0 +1,67 @@
+/* Fileira de pílulas dentro de um trilho arredondado. Fica no topo central da
+   tela, sobre o vidro — é o trocador de modos do sistema. */
+.lc-tabs {
+  display: inline-flex;
+  gap: var(--lc-space-2);
+  padding: 5px;
+  border-radius: var(--lc-radius-full);
+}
+
+.lc-tab {
+  background: none;
+  border: none;
+  color: var(--lc-muted);
+  font-family: var(--lc-font-sans);
+  font-size: var(--lc-text-14);
+  font-weight: var(--lc-weight-medium);
+  line-height: 1;
+  padding: 7px 20px;
+  border-radius: var(--lc-radius-full);
+  cursor: pointer;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lc-space-3);
+  transition:
+    background-color var(--lc-motion-hover) var(--lc-motion-ease),
+    color var(--lc-motion-hover) var(--lc-motion-ease),
+    transform var(--lc-motion-fast) var(--lc-motion-ease);
+}
+
+/* Inativa é `--lc-muted`: o hover só recupera o contraste, sem pintar fundo.
+   Assim a aba ativa continua sendo a única com peso na fileira. */
+.lc-tab:hover {
+  color: var(--lc-text);
+}
+
+.lc-tab:active {
+  transform: scale(var(--lc-press-scale-strong));
+}
+
+.lc-tab:focus-visible {
+  outline: none;
+  box-shadow: var(--lc-focus-ring);
+}
+
+.lc-tab.is-active {
+  background: var(--lc-accent);
+  color: var(--lc-accent-ink);
+  font-weight: var(--lc-weight-semibold);
+}
+
+.lc-tab:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+/* Em telas estreitas a fileira rola em vez de quebrar linha. */
+@media (max-width: 640px) {
+  .lc-tabs {
+    max-width: calc(100vw - 28px);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .lc-tabs::-webkit-scrollbar {
+    display: none;
+  }
+}

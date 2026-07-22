@@ -1,0 +1,54 @@
+.lc-toast-host {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  z-index: var(--lc-z-toast);
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: var(--lc-space-4);
+  pointer-events: none;
+}
+
+.lc-toast {
+  display: flex;
+  align-items: center;
+  gap: var(--lc-space-4);
+  padding: 10px 18px;
+  background: var(--lc-glass);
+  -webkit-backdrop-filter: var(--lc-blur-glass);
+  backdrop-filter: var(--lc-blur-glass);
+  border: 1px solid var(--lc-glass-border);
+  border-radius: var(--lc-radius-4xl);
+  box-shadow: var(--lc-shadow-toast);
+  color: var(--lc-text);
+  /* Mono: quase toda mensagem carrega um dado (nome de arquivo, contagem). */
+  font-family: var(--lc-font-mono);
+  font-size: var(--lc-text-13);
+  white-space: nowrap;
+  pointer-events: auto;
+  animation: lc-toast-in var(--lc-motion-slow) var(--lc-motion-ease-out);
+}
+
+.lc-toast--closing {
+  animation: lc-toast-out var(--lc-motion-base) ease-in forwards;
+}
+
+.lc-toast--danger {
+  color: var(--lc-danger);
+}
+
+.lc-toast--success .lc-icon {
+  color: var(--lc-success);
+}
+
+@keyframes lc-toast-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes lc-toast-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(10px); }
+}

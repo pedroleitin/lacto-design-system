@@ -1,0 +1,75 @@
+/* NOVO no Lacto — nenhum dos projetos de origem tinha checkbox de verdade
+   (todos usam Switch). Desenhado para casar com o resto: quadrado de 18px,
+   raio 6, marcado = preenchido com --lc-text. */
+.lc-check {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--lc-space-4);
+  font-size: var(--lc-text-14);
+  color: var(--lc-text);
+  cursor: pointer;
+  user-select: none;
+}
+
+.lc-check--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* O input nativo fica invisível mas presente: teclado, foco e formulário de
+   graça. O desenho é o <span> irmão. */
+.lc-check__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+.lc-check__box {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  border: 2px solid var(--lc-line-strong);
+  border-radius: var(--lc-radius-sm);
+  background: transparent;
+  color: transparent;
+  transition:
+    background-color var(--lc-motion-hover) var(--lc-motion-ease),
+    border-color var(--lc-motion-hover) var(--lc-motion-ease),
+    color var(--lc-motion-hover) var(--lc-motion-ease),
+    box-shadow var(--lc-motion-hover) var(--lc-motion-ease),
+    transform var(--lc-motion-fast) var(--lc-motion-ease);
+}
+
+.lc-check:hover .lc-check__box {
+  border-color: var(--lc-accent);
+}
+
+.lc-check:active .lc-check__box {
+  transform: scale(var(--lc-press-scale-strong));
+}
+
+.lc-check__input:checked + .lc-check__box,
+.lc-check__input:indeterminate + .lc-check__box {
+  background: var(--lc-text);
+  border-color: var(--lc-text);
+  color: var(--lc-panel);
+}
+
+.lc-check__input:focus-visible + .lc-check__box {
+  box-shadow: var(--lc-focus-ring);
+}
+
+.lc-check__box .lc-icon {
+  font-size: 14px;
+  font-variation-settings: "FILL" 0, "wght" 700, "GRAD" 0, "opsz" 20;
+}
+
+.lc-check__label {
+  line-height: 1.3;
+}

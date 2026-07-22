@@ -1,0 +1,97 @@
+/* Base comum a todas as variantes. */
+.lc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--lc-space-3);
+  height: var(--lc-size-control-md);
+  padding: 0 var(--lc-space-7);
+  border: none;
+  border-radius: var(--lc-radius-lg);
+  font-family: var(--lc-font-sans);
+  font-size: var(--lc-text-13);
+  font-weight: var(--lc-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color var(--lc-motion-hover) var(--lc-motion-ease),
+    color var(--lc-motion-hover) var(--lc-motion-ease),
+    border-color var(--lc-motion-hover) var(--lc-motion-ease),
+    box-shadow var(--lc-motion-hover) var(--lc-motion-ease),
+    transform var(--lc-motion-fast) var(--lc-motion-ease);
+}
+
+.lc-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--lc-focus-ring);
+}
+
+.lc-btn:active:not(:disabled) {
+  transform: scale(var(--lc-press-scale-soft));
+}
+
+.lc-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Tamanhos ─────────────────────────────────────────────────────────── */
+.lc-btn--sm {
+  height: var(--lc-size-control-sm);
+  padding: 0 var(--lc-space-6);
+  font-size: var(--lc-text-12);
+}
+.lc-btn--lg {
+  height: var(--lc-size-control-lg);
+  padding: 0 var(--lc-space-8);
+  font-size: var(--lc-text-14);
+}
+
+/* ── solid: o botão de ferramenta. Padrão do sistema. ─────────────────── */
+.lc-btn--solid {
+  background: var(--lc-surface);
+  color: var(--lc-text);
+}
+.lc-btn--solid:hover:not(:disabled) {
+  background: var(--lc-hover);
+}
+
+/* ── pill: contorno arredondado, hover amarelo cheio. ─────────────────── */
+.lc-btn--pill {
+  background: var(--lc-surface);
+  color: var(--lc-text);
+  border: 1.5px solid var(--lc-line-strong);
+  border-radius: var(--lc-radius-pill);
+  font-weight: var(--lc-weight-medium);
+}
+.lc-btn--pill:hover:not(:disabled) {
+  background: var(--lc-accent);
+  border-color: var(--lc-accent);
+  color: var(--lc-accent-ink);
+}
+
+/* ── ghost: sem superfície até o hover. ───────────────────────────────── */
+.lc-btn--ghost {
+  background: none;
+  color: var(--lc-text);
+}
+.lc-btn--ghost:hover:not(:disabled) {
+  background: var(--lc-hover);
+}
+
+/* ── Estado ativo: sempre amarelo, em qualquer variante. ──────────────── */
+.lc-btn.is-active {
+  background: var(--lc-accent);
+  border-color: var(--lc-accent);
+  color: var(--lc-accent-ink);
+  font-weight: var(--lc-weight-semibold);
+}
+
+/* ── hot: modificador momentâneo segurado no teclado (Shift/Alt/Cmd). ─── */
+.lc-btn.is-hot {
+  background: var(--lc-info);
+  border-color: var(--lc-info);
+  color: #fff;
+}

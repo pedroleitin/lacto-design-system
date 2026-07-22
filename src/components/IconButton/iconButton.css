@@ -1,0 +1,19 @@
+/* Botão quadrado/circular só de ícone. Herda a base .lc-btn e trava a largura
+   na altura, zerando o padding. */
+.lc-icon-btn {
+  width: var(--lc-size-control-md);
+  padding: 0;
+  gap: 0;
+}
+
+.lc-icon-btn.lc-btn--sm { width: var(--lc-size-control-sm); }
+.lc-icon-btn.lc-btn--lg { width: var(--lc-size-control-lg); }
+
+/* Redondo: usado na barra superior (tema, som) e em ações sobre conteúdo. */
+.lc-icon-btn--round {
+  border-radius: var(--lc-radius-full);
+}
+
+.lc-icon-btn:active:not(:disabled) {
+  transform: scale(var(--lc-press-scale-strong));
+}

@@ -1,0 +1,85 @@
+/* Painel sólido colado numa borda, com 10px de folga em volta: ele flutua
+   sobre o fundo em vez de encostar, o que deixa a grade de pontos visível
+   nas quatro laterais. */
+.lc-sidebar {
+  position: fixed;
+  top: 10px;
+  bottom: 10px;
+  left: 10px;
+  width: var(--lc-size-sidebar);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: var(--lc-radius-3xl);
+  background: var(--lc-panel);
+  color: var(--lc-text);
+  z-index: var(--lc-z-sidebar);
+}
+
+.lc-sidebar--right {
+  left: auto;
+  right: 10px;
+}
+
+/* Variante embutida: mesma aparência, no fluxo do layout. */
+.lc-sidebar--inline {
+  position: relative;
+  inset: auto;
+  height: 100%;
+}
+
+.lc-sidebar__header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--lc-space-4);
+  padding: var(--lc-space-8) var(--lc-space-10) var(--lc-space-6);
+  font-size: var(--lc-text-26);
+  font-weight: var(--lc-weight-medium);
+  line-height: 1;
+}
+
+.lc-sidebar__body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Empurra o que vier depois para o fim do corpo rolável (dicas, créditos). */
+.lc-sidebar__spacer {
+  margin-top: auto;
+}
+
+.lc-sidebar__footer {
+  flex-shrink: 0;
+  display: flex;
+  gap: var(--lc-space-4);
+  padding: var(--lc-space-8);
+}
+
+.lc-sidebar__footer > * {
+  flex: 1;
+}
+
+.lc-sidebar__hint {
+  padding: var(--lc-space-6) var(--lc-space-10);
+  font-size: var(--lc-text-11);
+  line-height: 1.6;
+  color: var(--lc-text);
+  opacity: 0.5;
+}
+
+/* Em telas estreitas a sidebar vira uma faixa de largura total no rodapé. */
+@media (max-width: 640px) {
+  .lc-sidebar {
+    top: auto;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    width: auto;
+    max-height: 60dvh;
+  }
+}
