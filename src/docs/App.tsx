@@ -15,6 +15,7 @@ import { useSound } from "../sound/useSound";
 import { Tooltip } from "../components/Tooltip/Tooltip";
 import { IconButton } from "../components/IconButton/IconButton";
 import { Badge } from "../components/Badge/Badge";
+import { Panel } from "../components/Panel/Panel";
 import { Segmented } from "../components/Segmented/Segmented";
 import { Switch } from "../components/Switch/Switch";
 
@@ -161,43 +162,37 @@ export default function App() {
     <div className="doc">
       <Tooltip />
 
+      {/* Som e tema: chrome do app, fixo no canto, fora da navegação. */}
+      <Panel className="doc__chrome">
+        <IconButton
+          round
+          icon={muted ? "volume_off" : "volume_up"}
+          label={muted ? t(lang, "soundOn") : t(lang, "soundOff")}
+          onClick={() => {
+            setMuted(!muted);
+            if (muted) note(9);
+          }}
+        />
+        <IconButton
+          round
+          icon={theme === "dark" ? "light_mode" : "dark_mode"}
+          label={theme === "dark" ? t(lang, "lightTheme") : t(lang, "darkTheme")}
+          onClick={() => {
+            const next = theme === "dark" ? "light" : "dark";
+            setTheme(next);
+            themeChirp(next === "dark");
+          }}
+        />
+      </Panel>
+
       <nav className="doc__nav lc-scroll">
         <div className="doc__brand">
           <a href="#/" className="doc__logo">Lacto</a>
-          <span style={{ display: "flex", gap: 2 }}>
-            <IconButton
-              round
-              size="sm"
-              iconSize="sm"
-              icon={muted ? "volume_off" : "volume_up"}
-              label={muted ? t(lang, "soundOn") : t(lang, "soundOff")}
-              onClick={() => {
-                setMuted(!muted);
-                // Nota de confirmação ao religar — ver a página Som.
-                if (muted) note(9);
-              }}
-            />
-            <IconButton
-              round
-              size="sm"
-              iconSize="sm"
-              icon={theme === "dark" ? "light_mode" : "dark_mode"}
-              label={theme === "dark" ? t(lang, "lightTheme") : t(lang, "darkTheme")}
-              onClick={() => {
-                const next = theme === "dark" ? "light" : "dark";
-                setTheme(next);
-                themeChirp(next === "dark");
-              }}
-            />
-          </span>
-        </div>
-
-        <div className="doc__lang">
           <Segmented
             aria-label={t(lang, "language")}
             value={lang}
             onChange={setLang}
-            options={LANGS.map((l) => ({ value: l, label: l === "en" ? "EN" : "PT" }))}
+            options={LANGS.map((l) => ({ value: l, label: l === "en" ? "EN" : "BR" }))}
           />
         </div>
 

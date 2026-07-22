@@ -29,6 +29,19 @@
   padding: 0 20px 18px;
 }
 
+/* Idioma: mesmo controle, uma escala abaixo — é chrome, não navegação. */
+.doc__brand .lc-seg {
+  flex-shrink: 0;
+  padding: 2px;
+  outline-width: 2px;
+}
+
+.doc__brand .lc-seg__opt {
+  padding: 3px 9px;
+  font-size: var(--lc-text-12);
+  border-radius: 6px;
+}
+
 .doc__logo {
   color: inherit;
   text-decoration: none;
@@ -413,9 +426,18 @@ blockquote.doc__md p:last-child {
   border-radius: 3px;
 }
 
-/* Seletor de idioma, logo abaixo da marca. */
-.doc__lang {
+/* Som e tema, fixos no canto superior direito — mesmo lugar do #topbar dos
+   projetos de origem. */
+.lc-panel.doc__chrome {
+  position: fixed;
+  top: var(--lc-space-5);
+  right: var(--lc-space-5);
+  z-index: var(--lc-z-popover);
   display: flex;
-  justify-content: flex-start;
-  padding: 0 20px 16px;
+  align-items: center;
+  gap: 2px;
+  /* Aperta a caixa nos botões: eles mantêm 36px, só a moldura encolhe.
+     Filhos redondos pedem um contêiner em pílula (raio aninhado). */
+  padding: 3px;
+  border-radius: var(--lc-radius-full);
 }

@@ -44,9 +44,9 @@ const onPause = () => document.body.classList.remove("lc-noblur");
 ## Ancoragem
 
 `anchor` posiciona o painel sobre a tela: `top-left`, `top-right`,
-`top-center`, `bottom-left`, `bottom-right`, `bottom-center`. As margens são
-14px no topo/laterais e 16px embaixo — a assimetria compensa o peso visual do
-rodapé.
+`top-center`, `bottom-left`, `bottom-right`, `bottom-center`. A folga é de
+**10px em todos os lados** (`--lc-space-5`) — a mesma da `Sidebar`, para duas
+caixas flutuantes na mesma tela se alinharem.
 
 O container pai precisa ser `position: relative` (ou ser a própria janela).
 

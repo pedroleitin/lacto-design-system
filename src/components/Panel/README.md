@@ -44,9 +44,9 @@ const onPause = () => document.body.classList.remove("lc-noblur");
 ## Anchoring
 
 `anchor` positions the panel over the screen: `top-left`, `top-right`,
-`top-center`, `bottom-left`, `bottom-right`, `bottom-center`. Margins are 14px at
-the top and sides, 16px at the bottom — the asymmetry compensates for the visual
-weight of the footer.
+`top-center`, `bottom-left`, `bottom-right`, `bottom-center`. The clearance is
+**10px on every side** (`--lc-space-5`) — the same as `Sidebar`, so two floating
+boxes on one screen line up.
 
 The parent container must be `position: relative` (or be the window itself).
 

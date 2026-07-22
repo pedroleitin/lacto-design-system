@@ -129,11 +129,16 @@ de padding lateral já encostam na curva.
 | Controles dentro de um `Accordion` | `20px` |
 | Colunas de um painel largo | `18px` |
 
-### As três margens que existem
+### As duas margens que existem
 
-- **10px** — folga da `Sidebar` em relação à janela
-- **14px / 16px** — `Panel` ancorado (topo e laterais / rodapé)
+- **10px** (`--lc-space-5`) — folga em relação à borda da janela, para **tudo**:
+  `Sidebar` e qualquer `Panel` ancorado. Um valor só, para duas caixas
+  flutuantes na mesma tela se alinharem.
 - **2px** — `Divider` vertical dentro de uma barra
+
+O `Panel` ancorado ficava a 14px nas laterais e 16px embaixo, herdado de outro
+repositório de origem. Duas convenções de folga numa tela só é desalinhamento
+visível, então o sistema passou a ter uma.
 
 Ligue as guias abaixo e passe o mouse: cada elemento mostra sua caixa, o padding
 de cada lado e o raio. O mesmo interruptor existe no exemplo de todo componente.

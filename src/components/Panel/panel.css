@@ -43,18 +43,21 @@ body.lc-noblur .lc-toast {
   margin: 0 0 var(--lc-space-5);
 }
 
-/* ── Ancoragem sobre a tela cheia ─────────────────────────────────────── */
+/* ── Ancoragem sobre a tela cheia ──────────────────────────────────────
+   Uma única folga: --lc-space-5 (10px), a mesma da Sidebar. Antes eram 14px
+   nas laterais e 16px embaixo, herdados de outro repositório — duas
+   convenções na mesma tela viram desalinhamento visível. */
 .lc-panel--float {
   position: absolute;
   z-index: var(--lc-z-float);
 }
 
-.lc-panel--top-left     { top: 14px;    left: 14px; }
-.lc-panel--top-right    { top: 14px;    right: 14px; }
-.lc-panel--top-center   { top: 14px;    left: 50%; transform: translateX(-50%); }
-.lc-panel--bottom-left  { bottom: 16px; left: 14px; }
-.lc-panel--bottom-right { bottom: 16px; right: 14px; }
-.lc-panel--bottom-center{ bottom: 16px; left: 50%; transform: translateX(-50%); }
+.lc-panel--top-left     { top: var(--lc-space-5);    left: var(--lc-space-5); }
+.lc-panel--top-right    { top: var(--lc-space-5);    right: var(--lc-space-5); }
+.lc-panel--top-center   { top: var(--lc-space-5);    left: 50%; transform: translateX(-50%); }
+.lc-panel--bottom-left  { bottom: var(--lc-space-5); left: var(--lc-space-5); }
+.lc-panel--bottom-right { bottom: var(--lc-space-5); right: var(--lc-space-5); }
+.lc-panel--bottom-center{ bottom: var(--lc-space-5); left: 50%; transform: translateX(-50%); }
 
 /* ── Morph: troca de conteúdo com a caixa mudando de tamanho ───────────
    Sequência: some o conteúdo (0.11s) → anima largura/altura (0.21s) → aparece

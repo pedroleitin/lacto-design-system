@@ -130,11 +130,16 @@ corner, 16px of side padding already touches the curve.
 | Controls inside an `Accordion` | `20px` |
 | Columns of a wide panel | `18px` |
 
-### The three margins that exist
+### The two margins that exist
 
-- **10px** — the `Sidebar`'s clearance from the window
-- **14px / 16px** — anchored `Panel` (top and sides / bottom)
+- **10px** (`--lc-space-5`) — clearance from the window edge, for **everything**:
+  `Sidebar` and any anchored `Panel`. One value, so two floating boxes on the same
+  screen line up.
 - **2px** — vertical `Divider` inside a toolbar
+
+The anchored `Panel` used to sit at 14px on the sides and 16px at the bottom,
+inherited from a different source repo. Two clearance conventions on one screen
+is visible misalignment, so the system now has one.
 
 Turn the guides on below and hover: every element shows its box, the padding on
 each side and the radius. The same switch exists in every component's example.
